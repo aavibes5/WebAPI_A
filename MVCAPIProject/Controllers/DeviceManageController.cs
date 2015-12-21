@@ -7,9 +7,11 @@ using System.Web.Http;
 using System.Data.SqlClient;
 using System.Data;
 using System.Threading.Tasks;
+using System.Security.Principal;
 
 namespace MVCAPIProject.Controllers
 {
+    [Authorize]
     public class DeviceManageController : ApiController
     {
         // GET api/devicemanage

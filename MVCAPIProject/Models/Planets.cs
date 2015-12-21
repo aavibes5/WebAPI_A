@@ -14,7 +14,7 @@ namespace MVCAPIProject.Models
         public string PlanetColor { get; set; }
         public int RingsNumber { get; set; }
         public string Civilization { get; set; }
-        public int RecolutionTime { get; set; }
+        public int RevolutionTime { get; set; }
 
     }
 }
