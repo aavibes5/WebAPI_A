@@ -11,22 +11,52 @@ using System.Security.Principal;
 
 namespace MVCAPIProject.Controllers
 {
-    [Authorize]
     public class DeviceManageController : ApiController
     {
         // GET api/devicemanage
-        public DataSet Get()
+        public List<MVCAPIProject.Models.PlanetBooking> Get()
         {
+            List<MVCAPIProject.Models.PlanetBooking> apj = new List<MVCAPIProject.Models.PlanetBooking>();
             DataAccessLayer.HardwareManagement cv = new DataAccessLayer.HardwareManagement();
-            return cv.GetDetails();
-        }
+            DataSet ds = cv.GetDetails();
+            foreach (DataRow item in ds.Tables[0].Rows)
+            {
+                MVCAPIProject.Models.PlanetBooking obj = new Models.PlanetBooking()
+                {
+                    PlanetID = int.Parse(item["PlanetID"].ToString()),
+                    HumanName = item["HumanName"].ToString(),
+                    EID = int.Parse(item["E-ID"].ToString()),
+                    Gender = item["Gender"].ToString(),
+                    FamilySize = int.Parse(item["FamilySize"].ToString())
+
+                };
+                apj.Add(obj);
+            }
+            return apj;
+        } 
         // GET api/devicemanage/5
-        public DataSet Get(int id)
+        public List<MVCAPIProject.Models.PlanetBooking> Get(int id)
         {
+            List<MVCAPIProject.Models.PlanetBooking> ap = new List<MVCAPIProject.Models.PlanetBooking>();
             DataAccessLayer.HardwareManagement gh = new DataAccessLayer.HardwareManagement();
-            Models.Planets dv = new Models.Planets();
-            dv.PlanetID = id;
-            return gh.getCategoryGV(dv.PlanetID);
+            Models.PlanetBooking dv = new Models.PlanetBooking();
+            dv.EID = id;
+            DataSet ds = gh.getCategoryGV(dv.EID);
+            foreach (DataRow item in ds.Tables[0].Rows)
+            {
+                MVCAPIProject.Models.PlanetBooking obj = new Models.PlanetBooking()
+                {
+                    PlanetID = int.Parse(item["PlanetID"].ToString()),
+                    HumanName = item["HumanName"].ToString(),
+                    EID = int.Parse(item["E-ID"].ToString()),
+                    Gender = item["Gender"].ToString(),
+                    FamilySize = int.Parse(item["FamilySize"].ToString())
+
+                };
+                ap.Add(obj);
+            }
+            return ap;
+
         }
 
         // POST api/devicemanage

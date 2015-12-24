@@ -26,6 +26,7 @@ namespace MVCAPIProject.DataAccessLayer
 
 
         #region Get Device Details By ID
+        
 
         public DataSet getCategoryGV(int cde)
         {
